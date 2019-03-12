@@ -1,0 +1,508 @@
+[
+    {
+        "id": "d87959c2.03749",
+        "type": "tab",
+        "label": "ECY",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "2dd9ce37.6c12c2",
+        "type": "split",
+        "z": "d87959c2.03749",
+        "name": "",
+        "splt": "object",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 710,
+        "y": 140,
+        "wires": [
+            [
+                "ff35b4cf.efc668"
+            ]
+        ]
+    },
+    {
+        "id": "53dd240.f7f785c",
+        "type": "switch",
+        "z": "d87959c2.03749",
+        "name": "Route AV",
+        "property": "BAC_type_inst",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "analogValue101",
+                "vt": "str",
+                "v2": "analogValue103",
+                "v2t": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1020,
+        "y": 140,
+        "wires": [
+            [
+                "c5afee37.cef4c8"
+            ]
+        ],
+        "outputLabels": [
+            "TestAV100"
+        ]
+    },
+    {
+        "id": "c5afee37.cef4c8",
+        "type": "debug",
+        "z": "d87959c2.03749",
+        "name": "Variables",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1180,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "ff35b4cf.efc668",
+        "type": "function",
+        "z": "d87959c2.03749",
+        "name": "Number",
+        "func": "msg.BAC_inst = (msg.payload.instance);\nmsg.BAC_type = (msg.payload.type)\nmsg.BAC_type_inst = (msg.BAC_type)+String(msg.BAC_inst);\nmsg.payload = Number(msg.payload.value);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 860,
+        "y": 140,
+        "wires": [
+            [
+                "53dd240.f7f785c"
+            ]
+        ]
+    },
+    {
+        "id": "5bcf2ce0.8abc24",
+        "type": "http request",
+        "z": "d87959c2.03749",
+        "name": "ECY Rest Post",
+        "method": "POST",
+        "ret": "obj",
+        "url": "http://{{device_IP}}:{{devicePort}}/api/rest/v1/protocols/bacnet/local/objects/{{property}}",
+        "tls": "",
+        "x": 540,
+        "y": 140,
+        "wires": [
+            [
+                "2dd9ce37.6c12c2"
+            ]
+        ]
+    },
+    {
+        "id": "43df73b2.ab1b5c",
+        "type": "change",
+        "z": "d87959c2.03749",
+        "name": "Multi Write",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"encode\":\"text\",\"propertyReferences\":[{\"type\":\"analogValue\",\"instance\":100,\"property\":\"presentValue\",\"value\":\"1100\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":101,\"property\":\"presentValue\",\"value\":\"1101\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":102,\"property\":\"presentValue\",\"value\":\"1102\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":103,\"property\":\"presentValue\",\"value\":\"1103\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":104,\"property\":\"presentValue\",\"value\":\"1104\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":105,\"property\":\"presentValue\",\"value\":\"1105\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":106,\"property\":\"presentValue\",\"value\":\"1106\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":107,\"property\":\"presentValue\",\"value\":\"1107\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":108,\"property\":\"presentValue\",\"value\":\"1108\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":109,\"property\":\"presentValue\",\"value\":\"1109\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":110,\"property\":\"presentValue\",\"value\":\"1110\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":111,\"property\":\"presentValue\",\"value\":\"1111\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":112,\"property\":\"presentValue\",\"value\":\"1112\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":113,\"property\":\"presentValue\",\"value\":\"1113\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":114,\"property\":\"presentValue\",\"value\":\"1114\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":115,\"property\":\"presentValue\",\"value\":\"1115\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":116,\"property\":\"presentValue\",\"value\":\"1116\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":117,\"property\":\"presentValue\",\"value\":\"1117\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":118,\"property\":\"presentValue\",\"value\":\"1118\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":119,\"property\":\"presentValue\",\"value\":\"1119\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":120,\"property\":\"presentValue\",\"value\":\"1120\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":121,\"property\":\"presentValue\",\"value\":\"1121\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":122,\"property\":\"presentValue\",\"value\":\"1122\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":123,\"property\":\"presentValue\",\"value\":\"1123\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":124,\"property\":\"presentValue\",\"value\":\"1124\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":125,\"property\":\"presentValue\",\"value\":\"1125\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":126,\"property\":\"presentValue\",\"value\":\"1126\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":127,\"property\":\"presentValue\",\"value\":\"1127\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":128,\"property\":\"presentValue\",\"value\":\"1128\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":129,\"property\":\"presentValue\",\"value\":\"1129\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":130,\"property\":\"presentValue\",\"value\":\"1130\",\"priority\":15,\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":131,\"property\":\"presentValue\",\"value\":\"1131\",\"priority\":15,\"arrayIndex\":-1}]}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "device_IP",
+                "pt": "msg",
+                "to": "device_ip",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "device_Port",
+                "pt": "msg",
+                "to": "port",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "property",
+                "pt": "msg",
+                "to": "write-property-multiple",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 180,
+        "wires": [
+            [
+                "5bcf2ce0.8abc24"
+            ]
+        ]
+    },
+    {
+        "id": "f5f46dc7.fdb9a",
+        "type": "change",
+        "z": "d87959c2.03749",
+        "name": "Multi Read",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"encode\":\"text\",\"propertyReferences\":[{\"type\":\"analogValue\",\"instance\":100,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":101,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":102,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":103,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":104,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":105,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":106,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":107,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":108,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":109,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":110,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":111,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":112,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":113,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":114,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":115,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":116,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":117,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":118,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":119,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":120,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":121,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":122,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":123,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":124,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":125,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":126,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":127,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":128,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":129,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":130,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":131,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":132,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":133,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":134,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":135,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":136,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":137,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":138,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":139,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":140,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":141,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":142,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":143,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":144,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":145,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":146,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":147,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":148,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":149,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":150,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":151,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":152,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":153,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":154,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":154,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":155,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":156,\"property\":\"presentValue\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":157,\"property\":\"presentValue\",\"arrayIndex\":-1}]}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "device_IP",
+                "pt": "msg",
+                "to": "device_ip",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "device_Port",
+                "pt": "msg",
+                "to": "port",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "property",
+                "pt": "msg",
+                "to": "read-property-multiple",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 140,
+        "wires": [
+            [
+                "5bcf2ce0.8abc24"
+            ]
+        ]
+    },
+    {
+        "id": "9d069500.e48bf8",
+        "type": "inject",
+        "z": "d87959c2.03749",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 140,
+        "wires": [
+            [
+                "f5f46dc7.fdb9a",
+                "51e7b378.e886ac"
+            ]
+        ]
+    },
+    {
+        "id": "4e8b449e.5087f4",
+        "type": "inject",
+        "z": "d87959c2.03749",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 180,
+        "wires": [
+            [
+                "43df73b2.ab1b5c",
+                "51e7b378.e886ac"
+            ]
+        ]
+    },
+    {
+        "id": "c4e021cf.3a5058",
+        "type": "split",
+        "z": "d87959c2.03749",
+        "name": "",
+        "splt": "object",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 710,
+        "y": 220,
+        "wires": [
+            [
+                "41dc8baf.ff3c04"
+            ]
+        ]
+    },
+    {
+        "id": "ac535afa.43e7a8",
+        "type": "inject",
+        "z": "d87959c2.03749",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 220,
+        "wires": [
+            [
+                "d0da200a.2ac898",
+                "51e7b378.e886ac"
+            ]
+        ]
+    },
+    {
+        "id": "c145eba6.b79ec8",
+        "type": "split",
+        "z": "d87959c2.03749",
+        "name": "",
+        "splt": ",",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 1010,
+        "y": 220,
+        "wires": [
+            [
+                "f644f6c6.4c3b48"
+            ]
+        ]
+    },
+    {
+        "id": "f644f6c6.4c3b48",
+        "type": "string",
+        "z": "d87959c2.03749",
+        "name": "",
+        "methods": [
+            {
+                "name": "delLeftMost",
+                "params": [
+                    {
+                        "type": "str",
+                        "value": "="
+                    }
+                ]
+            },
+            {
+                "name": "delRightMost",
+                "params": [
+                    {
+                        "type": "str",
+                        "value": "}"
+                    }
+                ]
+            }
+        ],
+        "prop": "payload",
+        "propout": "payload",
+        "object": "msg",
+        "objectout": "msg",
+        "x": 1150,
+        "y": 220,
+        "wires": [
+            [
+                "ba67de4b.20004"
+            ]
+        ]
+    },
+    {
+        "id": "79675ba6.c18f84",
+        "type": "debug",
+        "z": "d87959c2.03749",
+        "name": "TestAV100-Pri01",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1630,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "ba67de4b.20004",
+        "type": "function",
+        "z": "d87959c2.03749",
+        "name": "Number",
+        "func": "msg.BAC_pri = (msg.parts.index)+1;\nmsg.BAC_type_inst_pri = (msg.BAC_type_inst)+\"_Pri\"+String(msg.BAC_pri);\nmsg.payload = Number(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1300,
+        "y": 220,
+        "wires": [
+            [
+                "e2f77a12.879d68"
+            ]
+        ]
+    },
+    {
+        "id": "51e7b378.e886ac",
+        "type": "change",
+        "z": "d87959c2.03749",
+        "name": "ECY Values",
+        "rules": [
+            {
+                "t": "set",
+                "p": "device_ip",
+                "pt": "flow",
+                "to": "192.168.207.32",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "port",
+                "pt": "flow",
+                "to": "80",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a3362a8a.d1585",
+        "type": "http request",
+        "z": "d87959c2.03749",
+        "name": "ECY Rest Post",
+        "method": "POST",
+        "ret": "obj",
+        "url": "http://{{device_IP}}:{{devicePort}}/api/rest/v1/protocols/bacnet/local/objects/{{property}}",
+        "tls": "",
+        "x": 540,
+        "y": 220,
+        "wires": [
+            [
+                "c4e021cf.3a5058"
+            ]
+        ]
+    },
+    {
+        "id": "d0da200a.2ac898",
+        "type": "change",
+        "z": "d87959c2.03749",
+        "name": "Multi Read Pri",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"encode\":\"text\",\"propertyReferences\":[{\"type\":\"analogValue\",\"instance\":100,\"property\":\"priorityArray\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":101,\"property\":\"priorityArray\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":102,\"property\":\"priorityArray\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":103,\"property\":\"priorityArray\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":104,\"property\":\"priorityArray\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":105,\"property\":\"priorityArray\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":106,\"property\":\"priorityArray\",\"arrayIndex\":-1},{\"type\":\"analogValue\",\"instance\":107,\"property\":\"priorityArray\",\"arrayIndex\":-1}]}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "device_IP",
+                "pt": "msg",
+                "to": "device_ip",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "device_Port",
+                "pt": "msg",
+                "to": "port",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "property",
+                "pt": "msg",
+                "to": "read-property-multiple",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 220,
+        "wires": [
+            [
+                "a3362a8a.d1585"
+            ]
+        ]
+    },
+    {
+        "id": "41dc8baf.ff3c04",
+        "type": "function",
+        "z": "d87959c2.03749",
+        "name": "Number",
+        "func": "msg.BAC_inst = (msg.payload.instance);\nmsg.BAC_type = (msg.payload.type)\nmsg.BAC_type_inst = (msg.BAC_type)+String(msg.BAC_inst);\nmsg.payload = String(msg.payload.value);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 860,
+        "y": 220,
+        "wires": [
+            [
+                "c145eba6.b79ec8"
+            ]
+        ]
+    },
+    {
+        "id": "e2f77a12.879d68",
+        "type": "switch",
+        "z": "d87959c2.03749",
+        "name": "",
+        "property": "BAC_type_inst_pri",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "analogValue102_Pri16",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1450,
+        "y": 220,
+        "wires": [
+            [
+                "79675ba6.c18f84"
+            ]
+        ]
+    }
+]
+
